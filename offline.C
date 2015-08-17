@@ -69,22 +69,49 @@ void offline(const char* FileName="test")
   
   // Get Histos from run output
   TH3F* mh3DelPhi;
+  TH2F* mh2npePt;
   mh3delPhi    = (TH3F*)f->Get("histo3DB0");
-
+  mh2npePt     = (TH2F*)f->Get("histos2DB1");
+  
   // make pt projections
   TH1D* projDelPhi[numPtBins];
+  TH1D* projNpeY[numPtBins];
   
   for(Int_t ptbin=0; ptbin<numPtBins; ptbin++)
     {
       projDelPhi[ptbin] = mh3delPhi->ProjectionZ(Form("projDelPhi_%i",ptbin),mh3delPhi->GetXaxis()->FindBin(lowpt[ptbin]),mh3delPhi->GetXaxis()->FindBin(highpt[ptbin]),mh3delPhi->GetYaxis()->FindBin(hptCut),-1);
+      projNpeY[ptbin]   = mh2npePt->ProjectionY(Form("projNpeY_%i",ptbin),mh2npePt->GetXaxis()->FindBin(lowpt[ptbin]),mh2npePt->GetXaxis()->FindBin(highpt[ptbin]));
+    }
 
+  // Draw histos
+  TPaveText* lbl[numPtBins];
+  char textLabel[100];
+  for(Int_t ptbin=0; ptbin<numPtBins; ptbin++)
+    {
+      // Init necessary plotting tools
+      lbl[ptbin] = new TPaveText(.2,.8,.5,.85,Form("NB NDC%i",ptbin));
+      sprintf(textLabel,"%.1f < P_{T,e} < %.1f",lowpt[ptbin],highpt[ptbin]);
+      lbl[ptbin]->AddText(textLabel);
+      lbl[ptbin]->SetFillColor(kWhite);
+      
+      // Calculate scaling Factor
+      Int_t Norm = projNpeY[ptbin]->GetEntries();
+      Double_t binWidth = projDelPhi[ptbin]->GetBinWidth(1);
       deltaPhi->cd(ptbin+1);
+      deltaPhi->SetLogy(1);
       projDelPhi[ptbin]->GetXaxis()->SetTitle("#Delta#phi_{eh}");
+      projDelPhi[ptbin]->Sumw2();
+      projDelPhi[ptbin]->Scale(1./((Double_t)Norm*binWidth));
+      projDelPhi[ptbin]->GetYaxis()->SetTitle("1/N_{NPE} #upoint dN/d(#Delta)#phi");
+      projDelPhi[ptbin]->GetYaxis()->SetRangeUser(0,5);
       if(ptbin == 0)
-	projDelPhi[ptbin]->SetTitle("Pythia NPE-had #Delta#phi - b/#overline{b}");
-     else
+	projDelPhi[ptbin]->SetTitle("Pythia NPE-had #Delta#phi - b/#bar{b}");
+      else
 	projDelPhi[ptbin]->SetTitle("");
-      projDelPhi[ptbin]->Draw("E");
+      if(ptbin < 13){
+	projDelPhi[ptbin]->Draw("E");
+	lbl[ptbin]->Draw("same");
+      }
     }
 
    // Make PDF with output canvases
@@ -108,7 +135,7 @@ void offline(const char* FileName="test")
       if(found >= 0){
 	titlename.Replace(0, found+1, "");
       } 
-      sprintf(tlName, "RUN 12 NPE-h #Delta#phi Pythia Templates");
+      sprintf(tlName, "RUN 12 NPE-h   #Delta#phi Pythia Templates");
       tl.SetTextSize(0.05);
       tl.SetTextColor(kWhite);
       tl.DrawLatex(0.05, 0.92,tlName);
