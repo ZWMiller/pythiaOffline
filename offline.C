@@ -2,8 +2,9 @@
 //
 // .L offline.C
 // offline("FILENAME") # Without .root Extension
+// modes: 0 = no ID about type of input, 1 = c/cbar, 2 = b/bbar
 
-void offline(const char* FileName="test")
+void offline(const char* FileName="test", const Int_t mode="0")
 {
    
   // Set Style parameters for this macro
@@ -103,9 +104,16 @@ void offline(const char* FileName="test")
       projDelPhi[ptbin]->Sumw2();
       projDelPhi[ptbin]->Scale(1./((Double_t)Norm*binWidth));
       projDelPhi[ptbin]->GetYaxis()->SetTitle("1/N_{NPE} #upoint dN/d(#Delta)#phi");
-      projDelPhi[ptbin]->GetYaxis()->SetRangeUser(0,5);
+      // projDelPhi[ptbin]->GetYaxis()->SetRangeUser(0,5);
       if(ptbin == 0)
-	projDelPhi[ptbin]->SetTitle("Pythia NPE-had #Delta#phi - b/#bar{b}");
+	{
+	  if(mode == 1)
+	    projDelPhi[ptbin]->SetTitle("Pythia NPE-had #Delta#phi - Template not specified");
+	  if(mode == 1)
+	    projDelPhi[ptbin]->SetTitle("Pythia NPE-had #Delta#phi - c/#bar{c}");
+	  if(mode == 2)
+	    projDelPhi[ptbin]->SetTitle("Pythia NPE-had #Delta#phi - b/#bar{b}");
+	}
       else
 	projDelPhi[ptbin]->SetTitle("");
       if(ptbin < 13){
