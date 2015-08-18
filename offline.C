@@ -170,14 +170,14 @@ void offline(const char* FileName="test")
   char temp[200];
   for(Int_t ii=0;ii<50;ii++)
     {
-      sprintf(fName, "script/run_B_%i.csh", ii);
+      sprintf(fName, "script/run_C_%i.csh", ii);
       std::ofstream outFile(fName,std::ofstream::out);
       outFile << "#!/bin/csh" << endl << endl;
       outFile << "source /star/u/zamiller/.cshrc" << endl;
       outFile << "cd /star/u/zbtang/myTools/root/" << endl;
       outFile << "source bin/thisroot.csh" << endl;
       outFile << "cd /star/u/zamiller/simu/NPETemplates" << endl;
-      sprintf(temp, "./NPEHDelPhiCorr cards/NpeB_%i.cmnd output/NpeBHcorr_%i.root B",ii,ii);
+      sprintf(temp, "./NPEHDelPhiCorr cards/NpeC_%i.cmnd output/NpeCHcorr_%i.root C",ii,ii);
       outFile << temp << endl;
       outFile.close();
       }*/
