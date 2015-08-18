@@ -5,4 +5,6 @@ Usage:
 
 root
 .L offline.C
-offline("file_name_no_extension")
+offline("file_name_no_extension","mode")
+
+mode 0 = no specified reaction type, mode 1 = c/cbar reaction, mode 2 = b/bbar reaction
