@@ -4,9 +4,13 @@
 // offline("FILENAME") # Without .root Extension
 // modes: 0 = no ID about type of input, 1 = c/cbar, 2 = b/bbar
 
-void offline(const char* FileName="test", const Int_t mode="0")
+void offline(const char* FileName="test", const Int_t mode=0)
 {
-   
+  if(mode == 0)
+    cout << endl << "No mode specified in offline('fileName',mode):" << endl
+	 << "mode 1: c/cbar; mode 2: b/bbar." << endl
+	 << "Running with mode set to undetermined" << endl << endl;
+  
   // Set Style parameters for this macro
   gStyle->SetOptTitle(1); // Show Title (off by default for cleanliness)
   gErrorIgnoreLevel = kError; // Set Verbosity Level (kPrint shows all)
