@@ -71,12 +71,19 @@ void offline(const char* FileName="test", const Int_t mode=0)
   // Make Canvases
   TCanvas* deltaPhi = new TCanvas("deltaPhi","Pythia Delta Phi",150,0,1150,1000);
   deltaPhi->Divide(4,3);
-  
+  char histName[100];
+  if(mode == 1)
+    sprintf(histName, "C");
+  if(mode == 2)
+    sprintf(histName, "B");
   // Get Histos from run output
   TH3F* mh3DelPhi;
   TH2F* mh2npePt;
-  mh3delPhi    = (TH3F*)f->Get("histo3DB0");
-  mh2npePt     = (TH2F*)f->Get("histos2DB1");
+  char hist[100];
+  sprintf(hist, "histo3D%s0", histName);
+  mh3delPhi    = (TH3F*)f->Get(hist);
+  sprintf(hist, "histos2D%s1", histName);
+  mh2npePt     = (TH2F*)f->Get(hist);
   
   // make pt projections
   TH1D* projDelPhi[numPtBins];
