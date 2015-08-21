@@ -18,7 +18,7 @@ void plotTemplates(const char* FileName)
       exit(1); }
 
   // Set constants and projection bins
-  const Int_t numPtBins = 14;
+  const Int_t numPtBins = 10;
   Float_t lowpt[14] ={2.5,3.0,3.5,4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.5,10.,14.0};
   Float_t highpt[14]={3.0,3.5,4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.5,10.,14.,200.};
   Float_t hptCut=0.5;
