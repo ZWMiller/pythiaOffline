@@ -12,7 +12,7 @@ void offline(const char* FileName="test", const Int_t mode=0)
 	 << "Running with mode set to undetermined" << endl << endl;
   
   // Set Style parameters for this macro
-  gStyle->SetOptTitle(1); // Show Title (off by default for cleanliness)
+  //gStyle->SetOptTitle(1); // Show Title (off by default for cleanliness)
   gErrorIgnoreLevel = kError; // Set Verbosity Level (kPrint shows all)
   // sets batch mode, so don't draw canvas
   number = 2;
@@ -140,6 +140,7 @@ void offline(const char* FileName="test", const Int_t mode=0)
       // Calculate scaling Factor
       Int_t Norm = projNpeY[ptbin]->GetEntries();
       Double_t binWidth = projDelPhi[ptbin]->GetBinWidth(1);
+      binWidth = 1; // For comparing to previous work templates
       deltaPhi->cd(ptbin+1);
       deltaPhi->SetLogy(1);
       projDelPhi[ptbin]->GetXaxis()->SetTitle("#Delta#phi_{eh}");
