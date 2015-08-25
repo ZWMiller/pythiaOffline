@@ -12,7 +12,7 @@ void offline(const char* FileName="test", const Int_t mode=0)
 	 << "Running with mode set to undetermined" << endl << endl;
   
   // Set Style parameters for this macro
-  gStyle->SetOptTitle(1); // Show Title (off by default for cleanliness)
+  //gStyle->SetOptTitle(1); // Show Title (off by default for cleanliness)
   gErrorIgnoreLevel = kError; // Set Verbosity Level (kPrint shows all)
   // sets batch mode, so don't draw canvas
   number = 2;
@@ -98,6 +98,7 @@ void offline(const char* FileName="test", const Int_t mode=0)
   Float_t lowpt[14] ={2.5,3.0,3.5,4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.5,10.,14.0};
   Float_t highpt[14]={3.0,3.5,4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.5,10.,14.,200.};
   Float_t hptCut=0.5;
+  Float_t lowPhi=-4, highPhi=4;
 
   // Make Canvases
   TCanvas* deltaPhi = new TCanvas("deltaPhi","Pythia Delta Phi",150,0,1150,1000);
@@ -140,6 +141,7 @@ void offline(const char* FileName="test", const Int_t mode=0)
       // Calculate scaling Factor
       Int_t Norm = projNpeY[ptbin]->GetEntries();
       Double_t binWidth = projDelPhi[ptbin]->GetBinWidth(1);
+      binWidth = 1; // For comparing to previous work templates
       deltaPhi->cd(ptbin+1);
       deltaPhi->SetLogy(1);
       projDelPhi[ptbin]->GetXaxis()->SetTitle("#Delta#phi_{eh}");
