@@ -24,9 +24,9 @@ void makeScripts(Int_t mode = 1, Int_t pthatmin = 0, Int_t pthatmax = 100,Int_t 
       outFile << "source bin/thisroot.csh" << endl;
       outFile << "cd /star/u/zamiller/simu/ptHatTemplates" << endl;
       if(mode==1)
-	sprintf(temp, "./NPEHDelPhiCorr cards/NpeC%i_%i_%i.cmnd output/NpeCHcorr%i_%i_%i.root C",pthatmin,pthatmax,ii,pthatmin,pthatmax,ii);
+	sprintf(temp, "./NPEHDelPhiCorr cards/NpeC%i_%i_%i.cmnd output/npeC%i_%i/NpeCHcorr%i_%i_%i.root C",pthatmin,pthatmax,ii,pthatmin,pthatmax,pthatmin,pthatmax,ii);
       if(mode==2)
-	sprintf(temp, "./NPEHDelPhiCorr cards/NpeB%i_%i_%i.cmnd output/NpeBHcorr%i_%i_%i.root B",pthatmin,pthatmax,ii,pthatmin,pthatmax,ii);
+	sprintf(temp, "./NPEHDelPhiCorr cards/NpeB%i_%i_%i.cmnd output/npeB%i_%i/NpeBHcorr%i_%i_%i.root B",pthatmin,pthatmax,ii,pthatmin,pthatmax,pthatmin,pthatmaxii);
       outFile << temp << endl;
       outFile.close();
       }
