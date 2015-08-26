@@ -1,4 +1,11 @@
+/*
+Used to make input Pythia cards for multiple runs. The options that change are at the end. This includes turning ccbar or bbbar processes on/off, the random number seed, and the pthat binning. 
 
+The text write is ugly, but necessary.
+
+Z. Miller - 8/26/15
+
+ */
 
 void makeCards(Int_t mode=1, Float_t pthatmin=0, Float_t pthatmax=100, Int_t numRuns=25)
 {
