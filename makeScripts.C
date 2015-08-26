@@ -16,7 +16,7 @@ void makeScripts(Int_t mode = 1, Int_t pthatmin = 0, Int_t pthatmax = 100,Int_t 
       if(mode == 1)
 	sprintf(fName, "script/run_C%i_%i_%i.csh", pthatmin,pthatmax,ii);
       if(mode == 2)
-	sprintf(fName, "script/run_C%i_%i_%i.csh", pthatmin,pthatmax,ii);
+	sprintf(fName, "script/run_B%i_%i_%i.csh", pthatmin,pthatmax,ii);
       std::ofstream outFile(fName,std::ofstream::out);
       outFile << "#!/bin/csh" << endl << endl;
       outFile << "source /star/u/zamiller/.cshrc" << endl;
