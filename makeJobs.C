@@ -11,7 +11,7 @@ void makeJobs(Int_t mode = 1, Int_t pthatmin = 0, Int_t pthatmax = 100,Int_t max
   if(mode == 2)
     sprintf(fName, "jobs/run_B%i_%i.job", pthatmin,pthatmax);
   std::ofstream outfile(fName,std::ofstream::out);
-  outfile << "Universe        = vanilla\nNotification    = never\nRequirements    = (CPU_Type != \"crs\") && (CPU_Experiment == \"star\")\nRank            = CPU_Speed\nPriority        = +19\nGetEnv          = True\nInitialdir      = /star/u/zamiller/simu/NPETemplates\nInput           = /dev/null\nNotify_user     = zamiller@rcf.rhic.bnl.gov\nGetEnv          = True\n+Experiment     = \"star\"\n+Job_Type       = \"cas\"\n\n";
+  outfile << "Universe        = vanilla\nNotification    = never\nRequirements    = (CPU_Type != \"crs\") && (CPU_Experiment == \"star\")\nRank            = CPU_Speed\nPriority        = +19\nGetEnv          = True\nInitialdir      = /star/u/zamiller/simu/ptHatTemplates\nInput           = /dev/null\nNotify_user     = zamiller@rcf.rhic.bnl.gov\nGetEnv          = True\n+Experiment     = \"star\"\n+Job_Type       = \"cas\"\n\n";
   if(mode == 1)
     for(Int_t run=0; run < maxRuns; run++)
       {
